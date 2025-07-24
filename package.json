@@ -1,0 +1,39 @@
+{
+	"name": "christmas-mcp-mariadb",
+	"version": "1.0.0",
+	"description": "A MariaDB MCP (Model Context Protocol) CLI tool for database operations",
+	"main": "bin/index.js",
+	"type": "module",
+	"bin": {
+		"christmas-mcp": "./bin/index.js"
+	},
+	"scripts": {
+		"start": "node ./bin/index.js"
+	},
+	"keywords": [
+		"mcp",
+		"copilot",
+		"mariadb",
+		"sql",
+		"cli",
+		"database",
+		"model-context-protocol"
+	],
+	"author": "Nest",
+	"license": "MIT",
+	"dependencies": {
+		"mysql2": "^3.6.5",
+		"dotenv": "^16.3.1"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nest/christmas-mcp-mariadb.git"
+	},
+	"bugs": {
+		"url": "https://github.com/nest/christmas-mcp-mariadb/issues"
+	},
+	"homepage": "https://github.com/nest/christmas-mcp-mariadb#readme"
+}
