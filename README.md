@@ -23,10 +23,16 @@ A professional **Model Context Protocol (MCP) server** for MariaDB/MySQL databas
 npm install -g christmas-mcp-mariadb
 ```
 
-### Configuration
+### Initial Setup
 
-Create a `mcp.json` file in your working directory:
+1. **Generate configuration file:**
+```bash
+christmas-mcp --init
+```
 
+This creates a sample `mcp.json` file in your current directory.
+
+2. **Edit the configuration:**
 ```json
 {
   "host": "localhost",
@@ -38,13 +44,27 @@ Create a `mcp.json` file in your working directory:
 }
 ```
 
-### Start the Server
-
+3. **Start the server:**
 ```bash
 christmas-mcp
 ```
 
-The server will connect to your database and be ready to receive MCP requests!
+### Alternative Configuration Methods
+
+**Using Environment Variables:**
+```bash
+export MCP_DB_HOST=localhost
+export MCP_DB_PORT=3306
+export MCP_DB_USER=myuser
+export MCP_DB_PASSWORD=mypass
+export MCP_DB_DATABASE=mydb
+christmas-mcp
+```
+
+**Command Line Help:**
+```bash
+christmas-mcp --help
+```
 
 ## 🔧 Integration Examples
 
@@ -239,6 +259,59 @@ export MCP_DB_DATABASE=mydb
 - **🛠️ Parameterized queries**: SQL injection protection where applicable
 - **📝 Comprehensive logging**: All operations logged with context
 - **🔐 Connection security**: Secure connection handling and cleanup
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+**1. "Could not load mcp.json" Warning**
+```bash
+# Generate a sample configuration file
+christmas-mcp --init
+# Then edit the created mcp.json with your database details
+```
+
+**2. "Database connection failed: Access denied"**
+- Verify your database credentials in `mcp.json`
+- Check if the user has proper permissions
+- Ensure the database server is running
+- Try connecting with a database client first to verify credentials
+
+**3. "Database connection failed: connect ECONNREFUSED"**
+- Check if MariaDB/MySQL is running
+- Verify the host and port in your configuration
+- Check firewall settings
+- For remote connections, ensure the server allows external connections
+
+**4. "Database doesn't exist"**
+- Create the database first, or
+- Remove the `database` field from `mcp.json` to connect without selecting a database
+- Use `show_databases` tool to list available databases
+
+**5. Server exits before responding to initialize**
+- This usually indicates a configuration or connection problem
+- Check the error messages above this line
+- Verify your `mcp.json` configuration
+- Test database connection manually first
+
+### Configuration Validation
+
+Test your configuration:
+```bash
+# Check if your database is accessible
+mysql -h localhost -u your_username -p your_database
+
+# Or for MariaDB
+mariadb -h localhost -u your_username -p your_database
+```
+
+### Debug Mode
+
+For more detailed logging, set environment variable:
+```bash
+export NODE_ENV=development
+christmas-mcp
+```
 
 ## 📊 Response Format
 
