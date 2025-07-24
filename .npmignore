@@ -1,0 +1,31 @@
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
+test-*.js
+demo.js
+
+# Development files
+.vscode/
+*.log
+npm-debug.log*
+.nyc_output
+coverage/
+
+# Documentation that's not needed in the package
+PUBLISH.md
+docs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+*.swp
+*.swo
+
+# Git files
+.git/
+.gitignore
