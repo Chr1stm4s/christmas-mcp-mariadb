@@ -11,9 +11,10 @@ A professional **Model Context Protocol (MCP) server** for MariaDB/MySQL databas
 
 - **🛡️ Security First**: Built-in safety features with confirmation for dangerous operations
 - **🔌 MCP Native**: Full Model Context Protocol compliance for AI assistant integration
-- **⚡ Production Ready**: Comprehensive error handling, connection management, and type safety
+- **⚡ Production Ready**: Connection pooling, automatic retry logic, and comprehensive error handling
 - **🎪 Flexible**: Works with Claude Desktop, custom MCP clients, and development tools
 - **📊 Comprehensive**: 6 specialized tools covering all database interaction needs
+- **🔧 Reliable**: Robust connection management prevents "connection closed" errors
 
 ## 🚀 Quick Start
 
@@ -130,7 +131,7 @@ echo '{"name": "list_tables", "arguments": {}}' | christmas-mcp
 | `describe_table` | Get table schema | 🟢 Safe | `table: string` |
 | `show_databases` | List databases | 🟢 Safe | None |
 | `server_info` | Get server details | 🟢 Safe | None |
-| `execute_sql` | Execute any SQL | 🟡 Requires confirmation | `sql: string, confirm: boolean` |
+| `execute_sql` | Execute any SQL (CREATE, ALTER, INSERT, etc.) | 🟡 Requires confirmation for dangerous ops | `sql: string, confirm: boolean` |
 
 ### 🔍 Tool Examples
 
@@ -259,6 +260,19 @@ export MCP_DB_DATABASE=mydb
 - **🛠️ Parameterized queries**: SQL injection protection where applicable
 - **📝 Comprehensive logging**: All operations logged with context
 - **🔐 Connection security**: Secure connection handling and cleanup
+
+## 🔧 Connection Management
+
+**Robust Connection Handling:**
+- **Connection Pooling**: Uses connection pools instead of single connections for better stability
+- **Automatic Retry**: Failed operations are automatically retried with exponential backoff
+- **Connection Recovery**: Automatically recovers from temporary connection losses
+- **Resource Management**: Proper cleanup and connection lifecycle management
+
+This eliminates common errors like:
+- "Can't add new command when connection is in closed state"
+- Connection timeouts during long-running operations
+- Resource leaks from unclosed connections
 
 ## 🔧 Troubleshooting
 
