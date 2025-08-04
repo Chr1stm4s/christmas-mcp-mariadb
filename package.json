@@ -22,7 +22,7 @@
     "sql",
     "server"
   ],
-  "author": "Nest",
+  "author": "Christmas",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
